@@ -58,11 +58,11 @@
       rafLoop = requestAnimationFrame(loop);
       if (!video.duration) return;
 
-      displayTime = lerp(displayTime, targetTime, 0.015);
+      displayTime = lerp(displayTime, targetTime, 0.008);
 
-      // Only seek when gap exceeds ~2 frames (0.067s) to reduce
-      // seek frequency — each seek causes a micro-stall/jitter.
-      if (!isSeeking && Math.abs(displayTime - video.currentTime) > 0.067) {
+      // Seek only when gap exceeds ~4 frames (0.133s) — minimises
+      // seek frequency, which is the primary cause of jitter.
+      if (!isSeeking && Math.abs(displayTime - video.currentTime) > 0.133) {
         isSeeking = true;
         video.currentTime = displayTime;
       }
