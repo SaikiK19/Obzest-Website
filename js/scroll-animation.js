@@ -58,7 +58,7 @@
       rafLoop = requestAnimationFrame(loop);
       if (!video.duration) return;
 
-      displayTime = lerp(displayTime, targetTime, 0.1);
+      displayTime = lerp(displayTime, targetTime, 0.06);
 
       // Only seek when the gap is visible (>1 frame at 30fps ≈ 0.033s)
       // and the browser isn't still processing the last seek.
@@ -85,6 +85,22 @@
     }
   }
 
+  /* ── Pre-buffer ─────────────────────────────────────────────
+     Seek to the last frame once so the browser fetches the full
+     video, then return to 0. Eliminates stalling near the end.  */
+  function prebuffer() {
+    const endTime = video.duration - 0.05;
+    video.currentTime = endTime;
+    video.addEventListener("seeked", function restoreStart() {
+      video.removeEventListener("seeked", restoreStart);
+      video.currentTime = 0;
+      displayTime = 0;
+      isSeeking   = false;
+      onScroll();
+      startLoop();
+    }, { once: true });
+  }
+
   /* ── Desktop init ───────────────────────────────────────── */
   function initDesktop() {
     video.pause();
@@ -93,11 +109,11 @@
     targetTime  = 0;
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    startLoop();
 
-    if (!video.duration) {
-      video.addEventListener("loadedmetadata", onScroll, { once: true });
+    if (video.duration) {
+      prebuffer();
+    } else {
+      video.addEventListener("loadedmetadata", prebuffer, { once: true });
     }
   }
 
