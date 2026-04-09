@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obzest | Sweet. Citrus. Obsessed.</title>
+  <meta name="description" content="Handcrafted candied citrus peels. Sulfite-free, clean label, small batch. Made in Washington, D.C.">
+  <link rel="stylesheet" href="https://use.typekit.net/qfk5bvf.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <!-- ══ NAVBAR ══════════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Obzest home">
+        <img src="ObzestLogo.png" alt="Obzest" class="logo-img">
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="process.html">Our Process</a></li>
+        <li><a href="where-to-find-us.html">Where to Find Us</a></li>
+        <li><a href="products/orange.html" class="nav-shop-btn">Shop</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation menu">
+      <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+      <ul class="mobile-links" role="list">
+        <li><a href="products/orange.html">Shop</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="process.html">Our Process</a></li>
+        <li><a href="where-to-find-us.html">Where to Find Us</a></li>
+      </ul>
+    </div>
+    <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+  </nav>
+
+
+  <!-- ══ HERO ════════════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <video
+        class="hero-img"
+        src="imagery/Obzest-Hero.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+      ></video>
+    </div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-content">
+      <h1 class="hero-headline">Sweet. Citrus. Obsessed.</h1>
+      <p class="hero-tagline">Handcrafted in D.C. from whole citrus fruit.</p>
+    </div>
+    <div class="scroll-indicator" aria-hidden="true">
+      <span class="scroll-text">Scroll</span>
+      <div class="scroll-arrow">
+        <svg width="16" height="20" viewBox="0 0 16 20" fill="none">
+          <path d="M8 1v16M1 11l7 7 7-7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ BRAND INTRO ════════════════════════════════════════ -->
+  <div class="text-reveal-outer">
+    <section class="brand-intro brand-intro--sticky">
+      <div class="brand-intro-inner">
+        <span class="eyebrow">Washington, D.C.</span>
+        <p class="statement js-text-reveal" data-quote="true">
+          "We took what was being thrown away and made it worth savoring."
+        </p>
+        <p class="sub">
+          Obzest was born from a simple, frustrating observation: commercial juicers discard mountains of nutrient-dense citrus peels every single day. We saw a massive opportunity where others saw trash. While we now source premium whole fruits to ensure the best quality, our mission remains rooted in sustainability. We have designed a production model where nothing is discarded: the peels are transformed into high-intensity "Sophisticated Sour" confections, and the juices are captured for premium syrups. We're making candy while proving that a CPG brand can be 100% waste-free from the ground up.
+        </p>
+      </div>
+    </section>
+  </div>
+
+
+  <!-- ══ ORANGE PEEL SCROLL ANIMATION ══════════════════════ -->
+  <section class="animation-wrapper" id="animationSection">
+    <div class="animation-sticky">
+      <video
+        class="peel-video"
+        id="peelVideo"
+        src="NewAnimationVideoWhiteBG.mp4"
+        muted
+        playsinline
+        preload="auto"
+        aria-hidden="true"
+      ></video>
+      <div class="animation-copy" aria-live="polite">
+        <p class="copy-item" data-at="0.12">Sulfite-free. Clean label. No shortcuts.</p>
+        <p class="copy-item" data-at="0.35">Born from the peel. 100% waste-free production.</p>
+        <p class="copy-item" data-at="0.58">Slightly tangy. Perfectly sweet. Undeniably premium.</p>
+        <p class="copy-item" data-at="0.80">Handcrafted in Washington, D.C.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ PRODUCTS ═══════════════════════════════════════════ -->
+  <section class="products-section js-fade-in" id="products">
+    <div class="section-header">
+      <span class="eyebrow">The Collection</span>
+      <h2>Three Peels. One Obsession.</h2>
+    </div>
+    <div class="products-grid">
+
+      <!-- Orange -->
+      <article class="product-card">
+        <img
+          class="product-card-img"
+          src="PackagingMockups/Product_Shots/OrangeFinalPackageMockup.png"
+          alt="Candied Mandarin packaging"
+        >
+        <div class="product-card-body">
+          <h3 class="product-name">Candied Mandarin</h3>
+          <p class="product-desc">Candied Citrus Peels · 1.7oz</p>
+          <p class="product-price">$9.99</p>
+          <div class="product-actions">
+            <a href="products/orange.html" class="btn-outline">Learn More</a>
+            <button class="btn-solid" data-variant="gid://shopify/ProductVariant/46200778850455">Add to Cart</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Lemon -->
+      <article class="product-card">
+        <img
+          class="product-card-img"
+          src="PackagingMockups/Product_Shots/LemonFinalPackageMockup.png"
+          alt="Candied Lemon packaging"
+        >
+        <div class="product-card-body">
+          <h3 class="product-name">Candied Lemon</h3>
+          <p class="product-desc">Candied Citrus Peels · 1.7oz</p>
+          <p class="product-price">$9.99</p>
+          <div class="product-actions">
+            <a href="products/lemon.html" class="btn-outline">Learn More</a>
+            <button class="btn-solid" data-variant="gid://shopify/ProductVariant/46200778752151">Add to Cart</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Lime -->
+      <article class="product-card">
+        <img
+          class="product-card-img"
+          src="PackagingMockups/Product_Shots/LimeFinalPackageBlankMockup.png"
+          alt="Candied Lime packaging"
+        >
+        <div class="product-card-body">
+          <h3 class="product-name">Candied Lime</h3>
+          <p class="product-desc">Candied Citrus Peels · 1.7oz</p>
+          <p class="product-price">$9.99</p>
+          <div class="product-actions">
+            <a href="products/lime.html" class="btn-outline">Learn More</a>
+            <button class="btn-solid" data-variant="gid://shopify/ProductVariant/46200778817687">Add to Cart</button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- ══ THE CRAFT ══════════════════════════════════════════ -->
+  <section class="craft-section" id="craft">
+    <div class="craft-text">
+      <span class="eyebrow">The Process</span>
+      <h2>Real fruit.<br>Nothing wasted.</h2>
+      <p>
+        We start with whole citrus, the kind grown for flavor, not appearance.
+        The peel is trimmed, blanched, and slowly candied in pure cane sugar until it
+        reaches that singular balance: chewy, bright, and unmistakably real.
+      </p>
+      <p>
+        No artificial colors. No sulfites. No fillers.
+        Just the peel, the sugar, and a touch of citric acid to keep it honest.
+        Every batch is made by hand in small quantities, because that's the only way
+        to get it right.
+      </p>
+      <a href="process.html" class="btn-text-link">Our Process</a>
+    </div>
+    <div class="craft-image">
+      <img
+        src="imagery/lemon2.jpg"
+        alt="Fresh lemons"
+      >
+    </div>
+  </section>
+
+
+  <!-- ══ ATTRIBUTES STRIP ═══════════════════════════════════ -->
+  <div class="attributes-strip" aria-label="Brand attributes">
+    <div class="attributes-inner">
+      <span class="attr-item">Sulfite-Free</span>
+      <span class="attr-item">Clean Label</span>
+      <span class="attr-item">Non-GMO</span>
+      <span class="attr-item">Small Batch</span>
+      <span class="attr-item">100% Waste-Free Production</span>
+      <span class="attr-item">No Artificial Colors</span>
+      <span class="attr-item">Handcrafted in D.C.</span>
+    </div>
+  </div>
+
+
+  <!-- ══ FIND US ════════════════════════════════════════════ -->
+  <section class="find-us-section" id="find-us">
+    <div class="find-us-bg" aria-hidden="true">
+      <img
+        src="imagery/lemonbeach.jpg"
+        alt=""
+      >
+    </div>
+    <div class="find-us-overlay" aria-hidden="true"></div>
+    <div class="find-us-content">
+      <span class="eyebrow">In the Wild</span>
+      <h2>Find Obzest near you.</h2>
+      <p>
+        From D.C. farmers markets to select local retailers,
+        Obzest is built face to face, sample by sample.
+      </p>
+      <a href="where-to-find-us.html" class="btn-ghost">Find a Stockist</a>
+    </div>
+  </section>
+
+
+  <!-- ══ INSTAGRAM / SOCIAL ═════════════════════════════════ -->
+  <section class="social-section" id="social">
+    <span class="eyebrow">Follow the Obsession</span>
+    <a href="https://instagram.com/get.obzest" class="social-handle" target="_blank" rel="noopener">@get.obzest</a>
+    <div class="social-grid" aria-label="Instagram grid">
+      <div class="social-grid-item">
+        <img src="imagery/treesea.jpg"          alt="Orange tree through Mediterranean archway">
+      </div>
+      <div class="social-grid-item">
+        <img src="imagery/clay.jpg"             alt="Terracotta wall with teal tiles">
+      </div>
+      <div class="social-grid-item">
+        <img src="imagery/clay2.jpg"            alt="Warm clay wall with plant shadows">
+      </div>
+      <div class="social-grid-item">
+        <img src="imagery/monika-grabkowska-GoeI4z3DmQw-unsplash.jpg" alt="Dried blood orange slices">
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ TESTIMONIALS ═════════════════════════════════════════ -->
+  <section class="testimonials-section js-fade-in" id="testimonials">
+    <div class="section-header">
+      <span class="eyebrow">What People Are Saying</span>
+      <h2>The Obsession Is Real.</h2>
+    </div>
+    <div class="testimonials-track-wrapper">
+      <div class="testimonials-grid">
+
+        <!-- Column 1 -->
+        <div class="testimonials-column" style="--duration: 32s">
+          <div class="testimonials-column-inner">
+            <article class="testimonial-card">
+              <blockquote>
+                <p>"Goes great as a garnish for my cocktail nights!"</p>
+                <footer><cite>Tom Carrol</cite><span class="testimonial-role">Instagram</span></footer>
+              </blockquote>
+            </article>
+            <article class="testimonial-card">
+              <blockquote>
+                <p>"I bought five bags of your crystallized lemon peel at the Cleveland Park market yesterday and gave them to friends at a dinner party tonight. They were super popular."</p>
+                <footer><cite>@scrunchware</cite><span class="testimonial-role">Instagram</span></footer>
+              </blockquote>
+            </article>
+            <article class="testimonial-card">
+              <blockquote>
+                <p>"Can't get enough."</p>
+                <footer><cite>@the_barham</cite><span class="testimonial-role">Instagram</span></footer>
+              </blockquote>
+            </article>
+            <!-- Duplicate for seamless loop -->
+            <article class="testimonial-card" aria-hidden="true">
+              <blockquote>
+                <p>"Goes great as a garnish for my cocktail nights!"</p>
+                <footer><cite>Tom Carrol</cite><span class="testimonial-role">Instagram</span></footer>
+              </blockquote>
+            </article>
+            <article class="testimonial-card" aria-hidden="true">
+              <blockquote>
+                <p>"I bought five bags of your crystallized lemon peel at the Cleveland Park market yesterday and gave them to friends at a dinner party tonight. They were super popular."</p>
+                <footer><cite>@scrunchware</cite><span class="testimonial-role">Instagram</span></footer>
+              </blockquote>
+            </article>
+            <article class="testimonial-card" aria-hidden="true">
+              <blockquote>
+                <p>"Can't get enough."</p>
+                <footer><cite>@the_barham</cite><span class="testimonial-role">Instagram</span></footer>
+              </blockquote>
+            </article>
+          </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="testimonials-column testimonials-column--mid" style="--duration: 40s">
+          <div class="testimonials-column-inner">
+            <article class="testimonial-card">
+              <blockquote>
+                <p>"Obzest is my favorite way to eat fruit."</p>
+                <footer><cite>Sai Kantheti</cite><span class="testimonial-role">Instagram</span></footer>
+              </blockquote>
+            </article>
+            <article class="testimonial-card">
+              <blockquote>
+                <p>"I just liquidated my 401k to buy more of these."</p>
+                <footer><cite>@nsilverblatt</cite><span class="testimonial-role">Instagram</span></footer>
+              </blockquote>
+            </article>
+            <article class="testimonial-card">
+              <blockquote>
+                <p>"I was absolutely wow-ed by these citrus peels! So tasty."</p>
+                <footer><cite>@dhoenig17</cite><span class="testimonial-role">Instagram</span></footer>
+              </blockquote>
+            </article>
+            <!-- Duplicate for seamless loop -->
+            <article class="testimonial-card" aria-hidden="true">
+              <blockquote>
+                <p>"Obzest is my favorite way to eat fruit."</p>
+                <footer><cite>Sai Kantheti</cite><span class="testimonial-role">Instagram</span></footer>
+              </blockquote>
+            </article>
+            <article class="testimonial-card" aria-hidden="true">
+              <blockquote>
+                <p>"I just liquidated my 401k to buy more of these."</p>
+                <footer><cite>@nsilverblatt</cite><span class="testimonial-role">Instagram</span></footer>
+              </blockquote>
+            </article>
+            <article class="testimonial-card" aria-hidden="true">
+              <blockquote>
+                <p>"I was absolutely wow-ed by these citrus peels! So tasty."</p>
+                <footer><cite>@dhoenig17</cite><span class="testimonial-role">Instagram</span></footer>
+              </blockquote>
+            </article>
+          </div>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="testimonials-column testimonials-column--last" style="--duration: 36s">
+          <div class="testimonials-column-inner">
+            <article class="testimonial-card">
+              <blockquote>
+                <p>"We are almost out from the stash we bought. Ready for purchasing refills!!! Lemon has been the big hit!"</p>
+                <footer><cite>@jzo.becks</cite><span class="testimonial-role">Instagram</span></footer>
+              </blockquote>
+            </article>
+            <article class="testimonial-card">
+              <blockquote>
+                <p>"The perfect post run snack."</p>
+                <footer><cite>Otto Dierig</cite><span class="testimonial-role">Instagram</span></footer>
+              </blockquote>
+            </article>
+            <article class="testimonial-card">
+              <blockquote>
+                <p>"The perfect balance of sweet and sour."</p>
+                <footer><cite>Christian Balistreri</cite><span class="testimonial-role">Instagram</span></footer>
+              </blockquote>
+            </article>
+            <!-- Duplicate for seamless loop -->
+            <article class="testimonial-card" aria-hidden="true">
+              <blockquote>
+                <p>"We are almost out from the stash we bought. Ready for purchasing refills!!! Lemon has been the big hit!"</p>
+                <footer><cite>@jzo.becks</cite><span class="testimonial-role">Instagram</span></footer>
+              </blockquote>
+            </article>
+            <article class="testimonial-card" aria-hidden="true">
+              <blockquote>
+                <p>"The perfect post run snack."</p>
+                <footer><cite>Otto Dierig</cite><span class="testimonial-role">Instagram</span></footer>
+              </blockquote>
+            </article>
+            <article class="testimonial-card" aria-hidden="true">
+              <blockquote>
+                <p>"The perfect balance of sweet and sour."</p>
+                <footer><cite>Christian Balistreri</cite><span class="testimonial-role">Instagram</span></footer>
+              </blockquote>
+            </article>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="attributes-strip" aria-label="Health attributes">
+    <div class="attributes-inner">
+      <span class="attr-item">Naturally Low Calorie</span>
+      <span class="attr-item">Pure Cane Sugar</span>
+      <span class="attr-item">Vegan</span>
+      <span class="attr-item">Gluten Free</span>
+      <span class="attr-item">Whole Fruit</span>
+      <span class="attr-item">Refreshing &amp; Light</span>
+      <span class="attr-item">No Additives</span>
+    </div>
+  </div>
+
+
+  <!-- ══ FOOTER ════════════════════════════════════════════ -->
+  <div class="footer-scroll-wrapper">
+    <div class="footer-scroll-inner">
+  <footer class="site-footer" id="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+
+        <div class="footer-brand">
+          <img src="ObzestLogo.png" alt="Obzest" class="footer-logo">
+          <p class="tagline">Sweet. Citrus. Obsessed.</p>
+          <p class="location">Handcrafted in Washington, D.C.</p>
+        </div>
+
+        <nav class="footer-col" aria-label="Footer navigation">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="products/orange.html">Shop</a></li>
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="process.html">Our Process</a></li>
+            <li><a href="where-to-find-us.html">Where to Find Us</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer-col" aria-label="Contact information">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="https://instagram.com/get.obzest" target="_blank" rel="noopener">@get.obzest</a></li>
+            <li><a href="mailto:info@getobzest.com">info@getobzest.com</a></li>
+            <li><a href="contact.html">Wholesale Inquiries</a></li>
+          </ul>
+        </nav>
+
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Obzest. All rights reserved.</p>
+        <p>Made with obsession in Washington, D.C.</p>
+      </div>
+    </div>
+  </footer>
+    </div>
+  </div>
+
+
+  <!-- Quiz popup -->
+  <div class="quiz-popup" id="quizPopup" role="dialog" aria-label="Citrus trivia quiz" aria-modal="true">
+    <button class="quiz-popup-close" id="quizPopupClose" aria-label="Close quiz">&times;</button>
+    <div id="quizPopupInner"></div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/nav.js"></script>
+  <script src="js/text-reveal.js"></script>
+  <script src="js/scroll-animation.js"></script>
+  <script src="js/fade-in.js"></script>
+  <script src="js/quiz-popup.js"></script>
+  <script src="js/cart.js"></script>
+
+</body>
+</html>

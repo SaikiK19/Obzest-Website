@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Where to Find Us | Obzest</title>
+  <link rel="stylesheet" href="https://use.typekit.net/qfk5bvf.css">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    /* ── Page Hero ─────────────────────────────────────────── */
+    .stockist-hero {
+      background: var(--color-teal);
+      padding: calc(var(--nav-height) + clamp(60px, 8vw, 100px)) 48px clamp(60px, 8vw, 100px);
+      text-align: center;
+    }
+    .stockist-hero .eyebrow {
+      color: var(--color-cream);
+      opacity: 0.7;
+      margin-bottom: 20px;
+    }
+    .stockist-hero h1 {
+      font-family: var(--font);
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(40px, 6vw, 76px);
+      color: var(--color-cream);
+      line-height: 1.15;
+      margin: 0 0 24px;
+    }
+    .stockist-hero-sub {
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: clamp(14px, 1.5vw, 17px);
+      color: var(--color-cream);
+      opacity: 0.8;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── Stub body ─────────────────────────────────────────── */
+    .stub-body {
+      background: var(--color-cream);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: clamp(72px, 10vw, 120px) 24px;
+      min-height: 40vh;
+    }
+    .stub-body p {
+      font-family: var(--font);
+      font-size: 16px;
+      color: var(--color-text);
+      opacity: 0.5;
+      letter-spacing: 0.04em;
+      margin-bottom: 36px;
+    }
+    .stub-back {
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-teal);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    @media (max-width: 600px) {
+      .stockist-hero { padding: calc(var(--nav-height) + 48px) 24px 56px; }
+    }
+  </style>
+</head>
+<body class="page-teal">
+
+  <!-- TODO: Replace with full Where to Find Us page in Phase 2 -->
+
+  <nav class="navbar scrolled" id="navbar" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Obzest home">
+        <img src="ObzestLogo.png" alt="Obzest" class="logo-img">
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="products/orange.html">Shop</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="process.html">Our Process</a></li>
+        <li><a href="where-to-find-us.html">Where to Find Us</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation menu">
+      <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+      <ul class="mobile-links" role="list">
+        <li><a href="products/orange.html">Shop</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="process.html">Our Process</a></li>
+        <li><a href="where-to-find-us.html">Where to Find Us</a></li>
+      </ul>
+    </div>
+    <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+  </nav>
+
+  <header class="stockist-hero">
+    <span class="eyebrow">Washington, D.C.</span>
+    <h1>Find Obzest Near You.</h1>
+    <p class="stockist-hero-sub">From farmers markets to local retailers — find Obzest in the wild, sample by sample.</p>
+  </header>
+
+  <main class="stub-body">
+    <p>D.C. retailer locations and market schedule, coming in Phase 2.</p>
+    <a href="index.html" class="stub-back">← Back to Home</a>
+  </main>
+
+  <script src="js/nav.js"></script>
+  <script src="js/fade-in.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>

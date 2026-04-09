@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop | Obzest</title>
+  <link rel="stylesheet" href="https://use.typekit.net/qfk5bvf.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    /* ── Shop Hero ─────────────────────────────────────────── */
+    .shop-hero {
+      background: var(--color-teal);
+      padding: calc(var(--nav-height) + clamp(48px, 7vw, 88px)) 48px clamp(48px, 7vw, 88px);
+      text-align: center;
+    }
+    .shop-hero .eyebrow {
+      color: var(--color-cream);
+      opacity: 0.65;
+      margin-bottom: 16px;
+    }
+    .shop-hero h1 {
+      font-family: var(--font);
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(36px, 5.5vw, 68px);
+      color: var(--color-cream);
+      line-height: 1.15;
+      margin: 0 0 20px;
+    }
+    .shop-hero-sub {
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: clamp(14px, 1.5vw, 17px);
+      color: var(--color-cream);
+      opacity: 0.75;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── Product Grid ──────────────────────────────────────── */
+    .shop-grid-section {
+      background: var(--color-cream);
+      padding: clamp(64px, 9vw, 110px) clamp(24px, 6vw, 80px);
+    }
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── Product Card ──────────────────────────────────────── */
+    .product-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .product-card-img-wrap {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      background: #f5f0e3;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .product-card-img-wrap img {
+      width: 75%;
+      height: 75%;
+      object-fit: contain;
+      transition: transform 0.5s ease;
+    }
+    .product-card:hover .product-card-img-wrap img {
+      transform: scale(1.04);
+    }
+    .product-card-name {
+      font-family: var(--font);
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(22px, 2.2vw, 30px);
+      color: var(--color-text);
+      margin: 0 0 12px;
+      line-height: 1.2;
+    }
+    .product-card-desc {
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: clamp(13px, 1.2vw, 15px);
+      color: var(--color-text);
+      opacity: 0.65;
+      line-height: 1.75;
+      margin: 0 0 20px;
+      max-width: 280px;
+    }
+    .product-card-price {
+      font-family: var(--font);
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      color: var(--color-teal);
+      margin-top: auto;
+      margin-bottom: 20px;
+    }
+    .product-card .btn-solid {
+      flex: none;
+      width: 100%;
+      max-width: 240px;
+      padding: 14px 0;
+      font-size: 12px;
+    }
+
+    @media (max-width: 800px) {
+      .shop-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+    }
+    @media (max-width: 520px) {
+      .shop-grid {
+        grid-template-columns: 1fr;
+        max-width: 360px;
+        gap: 48px;
+      }
+      .shop-hero { padding: calc(var(--nav-height) + 48px) 24px 52px; }
+    }
+  </style>
+</head>
+<body class="page-teal page-shop">
+
+  <nav class="navbar scrolled" id="navbar" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo" aria-label="Obzest home">
+        <img src="../ObzestLogo.png" alt="Obzest" class="logo-img">
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="../about.html">Our Story</a></li>
+        <li><a href="../process.html">Our Process</a></li>
+        <li><a href="../where-to-find-us.html">Where to Find Us</a></li>
+        <li><a href="orange.html" class="nav-shop-btn">Shop</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation menu">
+      <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+      <ul class="mobile-links" role="list">
+        <li><a href="orange.html">Shop</a></li>
+        <li><a href="../about.html">Our Story</a></li>
+        <li><a href="../process.html">Our Process</a></li>
+        <li><a href="../where-to-find-us.html">Where to Find Us</a></li>
+      </ul>
+    </div>
+    <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+  </nav>
+
+  <header class="shop-hero">
+    <span class="eyebrow">Small-batch · Washington, D.C.</span>
+    <h1>The Full Collection.</h1>
+    <p class="shop-hero-sub">Every peel slow-cooked and hand-finished. Pick your citrus — or collect all three.</p>
+  </header>
+
+  <section class="shop-grid-section">
+    <div class="shop-grid">
+
+      <!-- Orange -->
+      <article class="product-card">
+        <div class="product-card-img-wrap">
+          <img src="../PackagingMockups/Product_Shots/OrangeFinalPackageMockup.png" alt="Candied Mandarin packaging">
+        </div>
+        <h2 class="product-card-name">Candied Mandarin</h2>
+        <p class="product-card-desc">Sun-bright strips of mandarin peel slow-cooked to a jewel-like tenderness — intensely citrusy with a honeyed, lingering finish.</p>
+        <p class="product-card-price">$9.99 &nbsp;·&nbsp; 1.7 oz</p>
+        <button class="btn-solid" data-variant="gid://shopify/ProductVariant/46200778850455">Add to Cart</button>
+      </article>
+
+      <!-- Lemon -->
+      <article class="product-card">
+        <div class="product-card-img-wrap">
+          <img src="../PackagingMockups/Product_Shots/LemonFinalPackageMockup.png" alt="Candied Lemon packaging">
+        </div>
+        <h2 class="product-card-name">Candied Lemon</h2>
+        <p class="product-card-desc">Boldly tart and brilliantly bright — our candied lemon peel delivers a vivid citrus punch softened by a delicate, crystalline sugar crust.</p>
+        <p class="product-card-price">$9.99 &nbsp;·&nbsp; 1.7 oz</p>
+        <button class="btn-solid" data-variant="gid://shopify/ProductVariant/46200778752151">Add to Cart</button>
+      </article>
+
+      <!-- Lime -->
+      <article class="product-card">
+        <div class="product-card-img-wrap">
+          <img src="../PackagingMockups/Product_Shots/LimeFinalPackageBlankMockup.png" alt="Candied Lime packaging">
+        </div>
+        <h2 class="product-card-name">Candied Lime</h2>
+        <p class="product-card-desc">Fragrant and fiercely tangy, our candied lime peel opens with a sharp citrus edge that slowly mellows into a lush, tropical sweetness.</p>
+        <p class="product-card-price">$9.99 &nbsp;·&nbsp; 1.7 oz</p>
+        <button class="btn-solid" data-variant="gid://shopify/ProductVariant/46200778817687">Add to Cart</button>
+      </article>
+
+    </div>
+  </section>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/fade-in.js"></script>
+  <script src="../js/cart.js"></script>
+</body>
+</html>

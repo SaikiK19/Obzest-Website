@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Story | Obzest</title>
+  <meta name="description" content="Meet the founder behind Obzest — handcrafted candied citrus peels made in Washington, D.C.">
+  <link rel="stylesheet" href="https://use.typekit.net/qfk5bvf.css">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+
+    /* ── Page Hero ─────────────────────────────────────────── */
+    .story-hero {
+      background: var(--color-burnt);
+      padding: calc(var(--nav-height) + clamp(60px, 8vw, 100px)) 48px clamp(60px, 8vw, 100px);
+      text-align: center;
+    }
+
+    .story-hero .eyebrow {
+      color: var(--color-cream);
+      opacity: 0.7;
+      margin-bottom: 20px;
+    }
+
+    .story-hero h1 {
+      font-family: var(--font);
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(40px, 6vw, 76px);
+      color: var(--color-cream);
+      line-height: 1.15;
+      margin: 0;
+    }
+
+    /* ── Founder Section ───────────────────────────────────── */
+    .founder-section {
+      background: var(--color-cream);
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 0;
+    }
+
+    .founder-image-col {
+      position: relative;
+      min-height: 600px;
+    }
+
+    .founder-image-col img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .founder-text-col {
+      padding: clamp(56px, 7vw, 100px) clamp(48px, 6vw, 96px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .founder-text-col .eyebrow {
+      color: var(--color-burnt);
+      margin-bottom: 12px;
+    }
+
+    .founder-text-col h2 {
+      font-family: var(--font);
+      font-weight: 400;
+      font-size: clamp(28px, 3vw, 42px);
+      color: var(--color-text);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .founder-title {
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-burnt);
+      margin-bottom: 36px;
+      display: block;
+    }
+
+    .founder-text-col p {
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--color-text);
+      opacity: 0.8;
+      margin-bottom: 20px;
+    }
+
+    .founder-text-col p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ── Mission Strip ─────────────────────────────────────── */
+    .mission-strip {
+      background: var(--color-burnt);
+      padding: clamp(60px, 8vw, 100px) clamp(40px, 6vw, 120px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 6vw, 100px);
+      align-items: center;
+    }
+
+    .mission-strip-quote {
+      font-family: var(--font);
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(22px, 2.8vw, 38px);
+      color: var(--color-cream);
+      line-height: 1.4;
+    }
+
+    .mission-strip-text .eyebrow {
+      color: var(--color-cream);
+      opacity: 0.7;
+      margin-bottom: 20px;
+    }
+
+    .mission-strip-text p {
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--color-cream);
+      opacity: 0.85;
+    }
+
+    /* ── CTA Strip ─────────────────────────────────────────── */
+    .story-cta {
+      background: var(--color-cream);
+      padding: clamp(60px, 8vw, 100px) 48px;
+      text-align: center;
+      border-top: 1px solid var(--color-cream-dark);
+    }
+
+    .story-cta .eyebrow {
+      color: var(--color-teal);
+      margin-bottom: 20px;
+    }
+
+    .story-cta h2 {
+      font-family: var(--font);
+      font-weight: 400;
+      font-size: clamp(28px, 3.5vw, 46px);
+      color: var(--color-text);
+      margin-bottom: 36px;
+    }
+
+    .story-cta .btn-text-link {
+      font-size: 14px;
+    }
+
+    /* ── Responsive ────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .founder-section {
+        grid-template-columns: 1fr;
+      }
+
+      .founder-image-col {
+        position: relative;
+        min-height: 480px;
+      }
+
+      .founder-image-col img {
+        position: absolute;
+      }
+
+      .mission-strip {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .story-hero {
+        padding: calc(var(--nav-height) + 48px) 24px 56px;
+      }
+
+      .founder-image-col {
+        min-height: 360px;
+      }
+
+      .story-cta { padding: 60px 24px; }
+    }
+
+  </style>
+</head>
+<body class="page-orange">
+
+  <!-- ══ NAVBAR ══════════════════════════════════════════════ -->
+  <nav class="navbar scrolled" id="navbar" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Obzest home">
+        <img src="ObzestLogo.png" alt="Obzest" class="logo-img">
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="process.html">Our Process</a></li>
+        <li><a href="where-to-find-us.html">Where to Find Us</a></li>
+        <li><a href="products/orange.html" class="nav-shop-btn">Shop</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation menu">
+      <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+      <ul class="mobile-links" role="list">
+        <li><a href="products/orange.html">Shop</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="process.html">Our Process</a></li>
+        <li><a href="where-to-find-us.html">Where to Find Us</a></li>
+      </ul>
+    </div>
+    <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+  </nav>
+
+
+  <!-- ══ HERO ════════════════════════════════════════════════ -->
+  <header class="story-hero">
+    <span class="eyebrow">The Founder</span>
+    <h1>A Story Worth Savoring.</h1>
+  </header>
+
+
+  <!-- ══ FOUNDER BIO ══════════════════════════════════════════ -->
+  <section class="founder-section js-fade-in">
+    <div class="founder-image-col">
+      <img src="imagery/FounderPicture.JPEG" alt="Adam, founder of Obzest">
+    </div>
+    <div class="founder-text-col">
+      <span class="eyebrow">Meet the Maker</span>
+      <h2>Adam Taylor</h2>
+      <span class="founder-title">Founder &amp; Creator</span>
+      <p>Adam grew up in New Jersey, much influenced by his British and Cuban roots. He has long been fascinated by learning from different cultural perspectives, especially as a means to foster innovation. Adam pursued this interest at Vanderbilt University, where he studied Human &amp; Organizational Development and Economics. He was awarded the Chancellor's Scholarship, recognizing his commitment to diversity and leadership, and graduated summa cum laude and Phi Beta Kappa in 2018.</p>
+      <p>During his time at Vanderbilt, he completed an internship with The Nashville Food Project (TNFP), gleaning leftover produce from local farms and supermarkets to create nutritious meals for beneficiaries. Inspired by the mission of promoting prosperity while protecting the planet, he pursued a Fulbright Scholarship in Mexico City post-graduation. In Mexico, Adam worked at the United Nations Youth Association of Mexico (UNYAM), where he developed and began implementing the education NGO's international expansion strategy.</p>
+      <p>Adam then moved to rural Oaxaca to support informal education initiatives and deliver pedagogical strategy seminars. Most recently, he was a consultant at Accenture, working in corporate social responsibility and coordinating a professional development program for underserved youth.</p>
+      <p>Adam speaks English and Spanish fluently and has a working knowledge of both Hebrew and Italian.</p>
+    </div>
+  </section>
+
+
+  <!-- ══ MISSION ══════════════════════════════════════════════ -->
+  <section class="mission-strip js-fade-in">
+    <p class="mission-strip-quote">"We took what was being thrown away and made it worth savoring."</p>
+    <div class="mission-strip-text">
+      <span class="eyebrow">The Mission</span>
+      <p>Obzest was born from a simple, frustrating observation: commercial juicers discard mountains of nutrient-dense citrus peels every single day. We saw a massive opportunity where others saw trash. While we now source premium whole fruits to ensure the best quality, our mission remains rooted in sustainability. We have designed a production model where nothing is discarded: the peels are transformed into high-intensity "Sophisticated Sour" confections, and the juices are captured for premium syrups. We're making candy while proving that a CPG brand can be 100% waste-free from the ground up.</p>
+    </div>
+  </section>
+
+
+  <!-- ══ CTA ══════════════════════════════════════════════════ -->
+  <section class="story-cta">
+    <span class="eyebrow">Taste the Obsession</span>
+    <h2>Try Obzest for yourself.</h2>
+    <a href="products/orange.html" class="btn-text-link">Shop the Collection →</a>
+  </section>
+
+
+  <!-- ══ ATTRIBUTES STRIP ═════════════════════════════════════ -->
+  <div class="attributes-strip" aria-label="Brand attributes">
+    <div class="attributes-inner">
+      <span class="attr-item">Sulfite-Free</span>
+      <span class="attr-item">Clean Label</span>
+      <span class="attr-item">Non-GMO</span>
+      <span class="attr-item">Small Batch</span>
+      <span class="attr-item">100% Waste-Free Production</span>
+      <span class="attr-item">No Artificial Colors</span>
+      <span class="attr-item">Handcrafted in D.C.</span>
+    </div>
+  </div>
+
+
+  <!-- ══ FOOTER ════════════════════════════════════════════════ -->
+  <div class="footer-scroll-wrapper">
+    <div class="footer-scroll-inner">
+      <footer class="site-footer" id="footer">
+        <div class="footer-inner">
+          <div class="footer-top">
+            <div class="footer-brand">
+              <img src="ObzestLogo.png" alt="Obzest" class="footer-logo">
+              <p class="tagline">Sweet. Citrus. Obsessed.</p>
+              <p class="location">Handcrafted in Washington, D.C.</p>
+            </div>
+            <nav class="footer-col" aria-label="Footer navigation">
+              <h4>Explore</h4>
+              <ul>
+                <li><a href="products/orange.html">Shop</a></li>
+                <li><a href="about.html">Our Story</a></li>
+                <li><a href="where-to-find-us.html">Where to Find Us</a></li>
+              </ul>
+            </nav>
+            <nav class="footer-col" aria-label="Contact information">
+              <h4>Connect</h4>
+              <ul>
+                <li><a href="https://instagram.com/get.obzest" target="_blank" rel="noopener">@get.obzest</a></li>
+                <li><a href="mailto:info@getobzest.com">info@getobzest.com</a></li>
+                <li><a href="contact.html">Wholesale Inquiries</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div class="footer-bottom">
+            <p>&copy; 2026 Obzest. All rights reserved.</p>
+            <p>Made with obsession in Washington, D.C.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+
+  <!-- Scripts -->
+  <script src="js/nav.js"></script>
+  <script src="js/fade-in.js"></script>
+
+</body>
+</html>

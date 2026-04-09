@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candied Lemon | Obzest</title>
+  <link rel="stylesheet" href="https://use.typekit.net/qfk5bvf.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .stub-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      background-color: var(--color-cream);
+    }
+    .stub-page h1 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(40px, 6vw, 72px);
+      color: var(--color-text);
+      margin-bottom: 12px;
+    }
+    .stub-page .price {
+      font-family: var(--font-body);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--color-teal);
+      margin-bottom: 8px;
+    }
+    .stub-page p {
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: var(--color-text);
+      opacity: 0.5;
+      letter-spacing: 0.04em;
+    }
+    .stub-page img {
+      width: 200px;
+      margin: 0 auto 32px;
+    }
+    .stub-back {
+      margin-top: 40px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-teal);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    .stub-cart-btn {
+      margin: 16px auto 24px;
+      padding: 14px 36px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body class="has-countdown-banner page-shop">
+
+  <!-- Countdown Banner -->
+  <div class="shop-countdown-banner" id="shopCountdownBanner">
+    <p class="countdown-cta">Order within <span class="countdown-timer" id="shopCountdownDisplay">10:00</span> for 10% off</p>
+  </div>
+
+  <!-- TODO: Replace with full product page in Phase 2 -->
+
+  <nav class="navbar scrolled" id="navbar" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo" aria-label="Obzest home">
+        <img src="../ObzestLogo.png" alt="Obzest" class="logo-img">
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="../about.html">Our Story</a></li>
+        <li><a href="../process.html">Our Process</a></li>
+        <li><a href="../where-to-find-us.html">Where to Find Us</a></li>
+        <li><a href="lemon.html" class="nav-shop-btn">Shop</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation menu">
+      <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+      <ul class="mobile-links" role="list">
+        <li><a href="lemon.html">Shop</a></li>
+        <li><a href="../about.html">Our Story</a></li>
+        <li><a href="../process.html">Our Process</a></li>
+        <li><a href="../where-to-find-us.html">Where to Find Us</a></li>
+      </ul>
+    </div>
+    <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+  </nav>
+
+  <main class="stub-page">
+    <img src="../PackagingMockups/Product_Shots/LemonFinalPackageMockup.png" alt="Candied Lemon packaging">
+    <h1>Candied Lemon</h1>
+    <p class="price">$9.99 · 1.7oz</p>
+    <button class="btn-solid stub-cart-btn" data-variant="gid://shopify/ProductVariant/46200778752151">Add to Cart</button>
+    <p>Full product page, coming in Phase 2.</p>
+    <a href="../index.html" class="stub-back">← Back to Home</a>
+  </main>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/shop-countdown.js"></script>
+  <script src="../js/cart.js"></script>
+</body>
+</html>

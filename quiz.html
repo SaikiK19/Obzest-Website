@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Citrus Trivia | Obzest</title>
+  <meta name="description" content="Test your citrus knowledge and earn a discount on your Obzest order.">
+  <link rel="stylesheet" href="https://use.typekit.net/qfk5bvf.css">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+
+    /* ── Page layout ───────────────────────────────────────── */
+    .quiz-page {
+      min-height: 100vh;
+      background: var(--color-cream);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Hero band ─────────────────────────────────────────── */
+    .quiz-hero {
+      background: var(--color-burnt);
+      padding: calc(var(--nav-height) + clamp(52px, 7vw, 88px)) 48px clamp(52px, 7vw, 88px);
+      text-align: center;
+    }
+
+    .quiz-hero .eyebrow {
+      color: var(--color-cream);
+      opacity: 0.7;
+      margin-bottom: 16px;
+    }
+
+    .quiz-hero h1 {
+      font-family: var(--font);
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(36px, 5.5vw, 68px);
+      color: var(--color-cream);
+      line-height: 1.15;
+      margin: 0 0 20px;
+    }
+
+    .quiz-hero-sub {
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: clamp(14px, 1.4vw, 17px);
+      color: var(--color-cream);
+      opacity: 0.8;
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .quiz-hero-sub strong {
+      font-weight: 500;
+      opacity: 1;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 3px;
+    }
+
+    /* ── Quiz arena ────────────────────────────────────────── */
+    .quiz-arena {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: clamp(48px, 7vw, 100px) 24px clamp(64px, 9vw, 120px);
+    }
+
+    .quiz-card {
+      width: 100%;
+      max-width: 580px;
+      background: var(--color-white);
+      border-radius: 20px;
+      padding: clamp(32px, 5vw, 52px);
+      box-shadow: 0 12px 60px rgba(0,0,0,0.09);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .quiz-card.fading {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    /* ── Start screen ──────────────────────────────────────── */
+    .start-screen {
+      text-align: center;
+      padding: 8px 0;
+    }
+
+    .start-icon {
+      font-size: 56px;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .start-screen h2 {
+      font-family: var(--font);
+      font-weight: 400;
+      font-size: clamp(22px, 3vw, 30px);
+      color: var(--color-text);
+      margin-bottom: 12px;
+    }
+
+    .start-screen p {
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: 15px;
+      color: var(--color-text);
+      opacity: 0.6;
+      line-height: 1.6;
+      margin-bottom: 32px;
+      max-width: 380px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── Progress bar ──────────────────────────────────────── */
+    .quiz-progress {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+
+    .quiz-progress-label {
+      font-family: var(--font);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-burnt);
+      opacity: 0.75;
+    }
+
+    .quiz-progress-dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .quiz-dot {
+      height: 5px;
+      width: 28px;
+      border-radius: 999px;
+      background: var(--color-cream-dark);
+      transition: background 0.35s ease;
+    }
+
+    .quiz-dot.done   { background: var(--color-burnt); }
+    .quiz-dot.active { background: rgba(199,78,36,0.4); }
+
+    /* ── Question text ─────────────────────────────────────── */
+    .quiz-question {
+      font-family: var(--font);
+      font-weight: 400;
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--color-text);
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    /* ── Options ───────────────────────────────────────────── */
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .quiz-option {
+      width: 100%;
+      text-align: left;
+      padding: 13px 18px;
+      border-radius: 10px;
+      border: 1.5px solid var(--color-cream-dark);
+      background: var(--color-cream-light);
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: 14px;
+      color: var(--color-text);
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.12s ease, opacity 0.15s ease;
+      line-height: 1.4;
+    }
+
+    .quiz-option:hover:not(:disabled) {
+      background: rgba(199,78,36,0.08);
+      border-color: rgba(199,78,36,0.4);
+      transform: translateX(3px);
+    }
+
+    .quiz-option:active:not(:disabled) {
+      transform: translateX(3px) scale(0.985);
+    }
+
+    .quiz-option:disabled { cursor: default; }
+
+    .quiz-option.correct {
+      background: #f0fdf4;
+      border-color: #4ade80;
+      color: #14532d;
+      font-weight: 400;
+    }
+
+    .quiz-option.wrong {
+      background: #fef2f2;
+      border-color: #f87171;
+      color: #7f1d1d;
+      text-decoration: line-through;
+      text-decoration-color: rgba(127,29,29,0.5);
+    }
+
+    .quiz-option.dimmed { opacity: 0.35; }
+
+    /* ── Next button ───────────────────────────────────────── */
+    .quiz-next {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      border: none;
+      background: var(--color-burnt);
+      color: var(--color-cream);
+      font-family: var(--font);
+      font-weight: 400;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.15s ease, transform 0.12s ease;
+      display: none;
+    }
+
+    .quiz-next.visible { display: block; }
+
+    .quiz-next:hover  { opacity: 0.88; }
+    .quiz-next:active { transform: scale(0.985); }
+
+    /* ── Start / play button ───────────────────────────────── */
+    .btn-play {
+      display: inline-block;
+      padding: 15px 44px;
+      background: var(--color-burnt);
+      color: var(--color-cream);
+      font-family: var(--font);
+      font-weight: 400;
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.15s ease, transform 0.12s ease;
+      box-shadow: 0 6px 24px rgba(199,78,36,0.3);
+    }
+
+    .btn-play:hover  { opacity: 0.88; }
+    .btn-play:active { transform: scale(0.97); }
+
+    /* ── Result screen ─────────────────────────────────────── */
+    .result-screen {
+      text-align: center;
+    }
+
+    .result-icon {
+      font-size: 56px;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .result-screen h2 {
+      font-family: var(--font);
+      font-weight: 400;
+      font-size: clamp(22px, 3vw, 28px);
+      margin-bottom: 10px;
+    }
+
+    .result-screen h2.win  { color: #14532d; }
+    .result-screen h2.lose { color: var(--color-burnt); }
+
+    .result-screen p {
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: 14px;
+      color: var(--color-text);
+      opacity: 0.6;
+      line-height: 1.6;
+      max-width: 380px;
+      margin: 0 auto 24px;
+    }
+
+    .result-screen p strong {
+      font-weight: 500;
+      color: var(--color-burnt);
+      opacity: 1;
+    }
+
+    /* Discount code box */
+    .discount-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .discount-code {
+      background: rgba(199,78,36,0.1);
+      border: 2px dashed rgba(199,78,36,0.45);
+      border-radius: 10px;
+      padding: 12px 28px;
+    }
+
+    .discount-code span {
+      font-family: var(--font);
+      font-weight: 400;
+      font-size: 24px;
+      letter-spacing: 0.16em;
+      color: var(--color-burnt);
+    }
+
+    .btn-copy {
+      padding: 12px 20px;
+      border-radius: 8px;
+      border: none;
+      background: var(--color-burnt);
+      color: var(--color-cream);
+      font-family: var(--font);
+      font-weight: 400;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-copy:hover { opacity: 0.85; }
+    .btn-copy.copied {
+      background: #14532d;
+      color: #f0fdf4;
+    }
+
+    .result-fine {
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      color: var(--color-text);
+      opacity: 0.35;
+      margin-top: 8px;
+    }
+
+    /* ── Responsive ────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .quiz-hero { padding-left: 24px; padding-right: 24px; }
+      .quiz-card { border-radius: 14px; }
+      .discount-box { flex-direction: column; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAVBAR ══════════════════════════════════════════════ -->
+  <nav class="navbar scrolled" id="navbar" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Obzest home">
+        <img src="ObzestLogo.png" alt="Obzest" class="logo-img">
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="process.html">Our Process</a></li>
+        <li><a href="where-to-find-us.html">Where to Find Us</a></li>
+        <li><a href="products/orange.html" class="nav-shop-btn">Shop</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation menu">
+      <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+      <ul class="mobile-links" role="list">
+        <li><a href="products/orange.html">Shop</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="process.html">Our Process</a></li>
+        <li><a href="where-to-find-us.html">Where to Find Us</a></li>
+      </ul>
+    </div>
+    <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+  </nav>
+
+
+  <!-- ══ HERO ═══════════════════════════════════════════════ -->
+  <header class="quiz-hero">
+    <span class="eyebrow">Citrus Trivia</span>
+    <h1>How Well Do You Know Your Citrus?</h1>
+    <p class="quiz-hero-sub">Answer all <strong id="hero-q-count">3</strong> questions correctly and unlock <strong>10% off</strong> your order.</p>
+  </header>
+
+
+  <!-- ══ QUIZ ═══════════════════════════════════════════════ -->
+  <main class="quiz-arena">
+    <div class="quiz-card" id="quizCard">
+
+      <!-- START -->
+      <div class="start-screen" id="startScreen">
+        <div class="start-icon">🍊</div>
+        <h2>Ready to Play?</h2>
+        <p>Three questions stand between you and a discount. Think you know your citrus?</p>
+        <button class="btn-play" id="startBtn">Start the Quiz</button>
+      </div>
+
+      <!-- QUESTION (hidden until game starts) -->
+      <div id="questionScreen" style="display:none;">
+        <div class="quiz-progress">
+          <span class="quiz-progress-label" id="progressLabel">Question 1 of 3</span>
+          <div class="quiz-progress-dots" id="progressDots"></div>
+        </div>
+        <p class="quiz-question" id="questionText"></p>
+        <div class="quiz-options" id="optionsContainer"></div>
+        <button class="quiz-next" id="nextBtn">Next Question →</button>
+      </div>
+
+      <!-- RESULT (hidden until game ends) -->
+      <div class="result-screen" id="resultScreen" style="display:none;"></div>
+
+    </div>
+  </main>
+
+
+  <!-- ══ ATTRIBUTES STRIP ═════════════════════════════════════ -->
+  <div class="attributes-strip" aria-label="Brand attributes">
+    <div class="attributes-inner">
+      <span class="attr-item">Sulfite-Free</span>
+      <span class="attr-item">Clean Label</span>
+      <span class="attr-item">Non-GMO</span>
+      <span class="attr-item">Small Batch</span>
+      <span class="attr-item">100% Waste-Free Production</span>
+      <span class="attr-item">No Artificial Colors</span>
+      <span class="attr-item">Handcrafted in D.C.</span>
+    </div>
+  </div>
+
+
+  <!-- ══ FOOTER ════════════════════════════════════════════════ -->
+  <div class="footer-scroll-wrapper">
+    <div class="footer-scroll-inner">
+      <footer class="site-footer" id="footer">
+        <div class="footer-inner">
+          <div class="footer-top">
+            <div class="footer-brand">
+              <img src="ObzestLogo.png" alt="Obzest" class="footer-logo">
+              <p class="tagline">Sweet. Citrus. Obsessed.</p>
+              <p class="location">Handcrafted in Washington, D.C.</p>
+            </div>
+            <nav class="footer-col" aria-label="Footer navigation">
+              <h4>Explore</h4>
+              <ul>
+                <li><a href="products/orange.html">Shop</a></li>
+                <li><a href="about.html">Our Story</a></li>
+                <li><a href="process.html">Our Process</a></li>
+                <li><a href="where-to-find-us.html">Where to Find Us</a></li>
+              </ul>
+            </nav>
+            <nav class="footer-col" aria-label="Contact information">
+              <h4>Connect</h4>
+              <ul>
+                <li><a href="https://instagram.com/get.obzest" target="_blank" rel="noopener">@get.obzest</a></li>
+                <li><a href="mailto:info@getobzest.com">info@getobzest.com</a></li>
+                <li><a href="contact.html">Wholesale Inquiries</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div class="footer-bottom">
+            <p>&copy; 2026 Obzest. All rights reserved.</p>
+            <p>Made with obsession in Washington, D.C.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+
+  <script src="js/nav.js"></script>
+  <script>
+
+    // ── Config ──────────────────────────────────────────────
+    const QUESTION_COUNT = 3
+    const DISCOUNT_CODE  = "CITRUS10"
+    const DISCOUNT_PCT   = 10
+
+    document.getElementById("hero-q-count").textContent = QUESTION_COUNT
+
+    // ── Question bank ───────────────────────────────────────
+    const BANK = [
+      {
+        q: "What percentage of the world's lemons are produced in India?",
+        opts: ["16%", "25%", "36%", "50%"],
+        a: "16%",
+      },
+      {
+        q: "Which citrus fruit is a cross between a grapefruit and a mandarin?",
+        opts: ["Tangelo", "Yuzu", "Ugli fruit", "Clementine"],
+        a: "Tangelo",
+      },
+      {
+        q: "How many lemons does it take to charge a small smartphone?",
+        opts: ["About 500", "About 250", "About 100", "About 5,000"],
+        a: "About 500",
+      },
+      {
+        q: "Which country is the world's largest producer of oranges?",
+        opts: ["Brazil", "USA", "China", "India"],
+        a: "Brazil",
+      },
+      {
+        q: "What gives citrus fruits their sour taste?",
+        opts: ["Citric acid", "Ascorbic acid", "Malic acid", "Tartaric acid"],
+        a: "Citric acid",
+      },
+      {
+        q: "The navel orange has a small second fruit embedded at which end?",
+        opts: ["Blossom end", "Stem end", "Both ends", "It's named after the US Navy"],
+        a: "Blossom end",
+      },
+      {
+        q: "Which citrus fruit was used to prevent scurvy on long sea voyages?",
+        opts: ["Lime", "Orange", "Lemon", "Grapefruit"],
+        a: "Lime",
+      },
+      {
+        q: "What is the outer colored layer of citrus peel called?",
+        opts: ["Zest", "Pith", "Rind", "Albedo"],
+        a: "Zest",
+      },
+      {
+        q: "Approximately how many varieties of citrus fruits exist worldwide?",
+        opts: ["Over 600", "About 50", "Around 200", "Fewer than 30"],
+        a: "Over 600",
+      },
+      {
+        q: "Which citrus fruit is the most widely grown in the world?",
+        opts: ["Orange", "Lemon", "Lime", "Grapefruit"],
+        a: "Orange",
+      },
+      {
+        q: "The pink grapefruit gets its color from which pigment?",
+        opts: ["Lycopene", "Beta-carotene", "Anthocyanin", "Chlorophyll"],
+        a: "Lycopene",
+      },
+      {
+        q: "Which country is the origin of the Yuzu citrus fruit?",
+        opts: ["China", "Japan", "Korea", "Vietnam"],
+        a: "China",
+      },
+    ]
+
+    function shuffle(arr) {
+      return [...arr].sort(() => Math.random() - 0.5)
+    }
+
+    function pickQuestions() {
+      return shuffle(BANK).slice(0, QUESTION_COUNT).map(q => ({
+        ...q,
+        opts: shuffle(q.opts),
+      }))
+    }
+
+    // ── State ───────────────────────────────────────────────
+    let questions = []
+    let current   = 0
+    let answers   = []
+    let selected  = null
+
+    // ── DOM refs ────────────────────────────────────────────
+    const card          = document.getElementById("quizCard")
+    const startScreen   = document.getElementById("startScreen")
+    const questionScreen= document.getElementById("questionScreen")
+    const resultScreen  = document.getElementById("resultScreen")
+    const progressLabel = document.getElementById("progressLabel")
+    const progressDots  = document.getElementById("progressDots")
+    const questionText  = document.getElementById("questionText")
+    const optionsEl     = document.getElementById("optionsContainer")
+    const nextBtn       = document.getElementById("nextBtn")
+
+    // ── Transitions ─────────────────────────────────────────
+    function fadeCard(cb) {
+      card.classList.add("fading")
+      setTimeout(() => {
+        cb()
+        card.classList.remove("fading")
+      }, 200)
+    }
+
+    // ── Build progress dots ──────────────────────────────────
+    function renderDots() {
+      progressDots.innerHTML = ""
+      questions.forEach((_, i) => {
+        const d = document.createElement("div")
+        d.className = "quiz-dot" +
+          (i < current ? " done" : i === current ? " active" : "")
+        progressDots.appendChild(d)
+      })
+    }
+
+    // ── Render current question ──────────────────────────────
+    function renderQuestion() {
+      const q = questions[current]
+      progressLabel.textContent = `Question ${current + 1} of ${questions.length}`
+      renderDots()
+      questionText.textContent = q.q
+      optionsEl.innerHTML = ""
+      nextBtn.classList.remove("visible")
+      nextBtn.textContent = current + 1 < questions.length ? "Next Question →" : "See My Results"
+      selected = null
+
+      q.opts.forEach(opt => {
+        const btn = document.createElement("button")
+        btn.className = "quiz-option"
+        btn.textContent = opt
+        btn.addEventListener("click", () => selectOption(btn, opt, q.a))
+        optionsEl.appendChild(btn)
+      })
+    }
+
+    // ── Handle option selection ──────────────────────────────
+    function selectOption(btn, opt, answer) {
+      if (selected !== null) return
+      selected = opt
+
+      optionsEl.querySelectorAll(".quiz-option").forEach(b => {
+        b.disabled = true
+        const isThis    = b === btn
+        const isCorrect = b.textContent === answer
+
+        if (isCorrect) {
+          b.classList.add("correct")
+        } else if (isThis) {
+          b.classList.add("wrong")
+        } else {
+          b.classList.add("dimmed")
+        }
+      })
+
+      nextBtn.classList.add("visible")
+    }
+
+    // ── Advance ──────────────────────────────────────────────
+    nextBtn.addEventListener("click", () => {
+      if (selected === null) return
+      answers.push(selected === questions[current].a)
+
+      if (current + 1 < questions.length) {
+        fadeCard(() => {
+          current++
+          renderQuestion()
+        })
+      } else {
+        fadeCard(showResult)
+      }
+    })
+
+    // ── Result screen ────────────────────────────────────────
+    function showResult() {
+      questionScreen.style.display = "none"
+      resultScreen.style.display   = "block"
+
+      const correct = answers.filter(Boolean).length
+      const allWon  = correct === questions.length
+
+      if (allWon) {
+        resultScreen.innerHTML = `
+          <div class="result-icon">🎉</div>
+          <h2 class="win">Perfect Score!</h2>
+          <p>You aced the citrus trivia! Here's your <strong>${DISCOUNT_PCT}% off</strong> discount code:</p>
+          <div class="discount-box">
+            <div class="discount-code"><span id="codeText">${DISCOUNT_CODE}</span></div>
+            <button class="btn-copy" id="copyBtn">Copy Code</button>
+          </div>
+          <p class="result-fine">Use this code at checkout to claim your discount.</p>
+        `
+        document.getElementById("copyBtn").addEventListener("click", function() {
+          try { navigator.clipboard.writeText(DISCOUNT_CODE) } catch (_) {}
+          this.textContent = "Copied ✓"
+          this.classList.add("copied")
+        })
+      } else {
+        resultScreen.innerHTML = `
+          <div class="result-icon">🍋</div>
+          <h2 class="lose">So Close!</h2>
+          <p>You got <strong>${correct} out of ${questions.length}</strong> correct. You need a perfect score for the ${DISCOUNT_PCT}% discount — give it another squeeze!</p>
+          <p class="result-fine">Refresh the page to try again.</p>
+        `
+      }
+    }
+
+    // ── Start ────────────────────────────────────────────────
+    document.getElementById("startBtn").addEventListener("click", () => {
+      questions = pickQuestions()
+      current   = 0
+      answers   = []
+      selected  = null
+
+      fadeCard(() => {
+        startScreen.style.display    = "none"
+        questionScreen.style.display = "block"
+        renderQuestion()
+      })
+    })
+
+  </script>
+</body>
+</html>
