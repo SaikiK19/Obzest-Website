@@ -58,11 +58,11 @@
       rafLoop = requestAnimationFrame(loop);
       if (!video.duration) return;
 
-      displayTime = lerp(displayTime, targetTime, 0.03);
+      displayTime = lerp(displayTime, targetTime, 0.015);
 
-      // Only seek when the gap is visible (>1 frame at 30fps ≈ 0.033s)
-      // and the browser isn't still processing the last seek.
-      if (!isSeeking && Math.abs(displayTime - video.currentTime) > 0.033) {
+      // Only seek when gap exceeds ~2 frames (0.067s) to reduce
+      // seek frequency — each seek causes a micro-stall/jitter.
+      if (!isSeeking && Math.abs(displayTime - video.currentTime) > 0.067) {
         isSeeking = true;
         video.currentTime = displayTime;
       }
