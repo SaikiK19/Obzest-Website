@@ -58,7 +58,7 @@
       rafLoop = requestAnimationFrame(loop);
       if (!video.duration) return;
 
-      displayTime = lerp(displayTime, targetTime, 0.06);
+      displayTime = lerp(displayTime, targetTime, 0.03);
 
       // Only seek when the gap is visible (>1 frame at 30fps ≈ 0.033s)
       // and the browser isn't still processing the last seek.
