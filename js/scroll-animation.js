@@ -2,11 +2,10 @@
    Obzest — scroll-animation.js
    Scroll-driven orange peel video scrub.
 
-   Desktop: video.currentTime driven by scroll position within
-   the sticky wrapper. Uses getBoundingClientRect for reliable
-   position calculation. Scroll listener attaches immediately
-   so it doesn't depend on canplaythrough (which browsers
-   often skip for non-autoplay video).
+   Desktop: targetTime is set instantly from scroll, but a
+   rAF loop lerps displayTime toward targetTime each frame,
+   then seeks only when the delta is meaningful. This decouples
+   scroll events from video seeks for a smooth scrub feel.
    Mobile (<768px): video autoplays looped, all copy visible.
    ============================================================ */
 
@@ -19,8 +18,7 @@
 
   const isMobile = () => window.innerWidth < 768;
 
-  /* ── Mobile fallback ──────────────────────────────────────
-     Autoplay looped video, show all copy items statically.   */
+  /* ── Mobile fallback ────────────────────────────────────── */
   function initMobile() {
     video.autoplay = true;
     video.loop     = true;
@@ -28,10 +26,7 @@
     copyItems.forEach(item => item.classList.add("visible"));
   }
 
-  /* ── Progress ─────────────────────────────────────────────
-     getBoundingClientRect + scrollY gives true doc position,
-     unlike offsetTop which can be wrong with any positioned
-     ancestor in the chain.                                   */
+  /* ── Progress ───────────────────────────────────────────── */
   function getProgress() {
     const wrapperTop = wrapper.getBoundingClientRect().top + window.scrollY;
     const scrollable = wrapper.offsetHeight - window.innerHeight;
@@ -49,56 +44,64 @@
     });
   }
 
-  let targetTime = 0;
-  let isSeeking  = false;
-  let raf        = null;
+  /* ── Lerp scrub ─────────────────────────────────────────── */
+  let targetTime  = 0; // set instantly on scroll
+  let displayTime = 0; // lerped toward targetTime each frame
+  let isSeeking   = false;
+  let rafLoop     = null;
 
-  function applySeek() {
-    if (!video.duration) return;
-    video.currentTime = targetTime;
-  }
+  function lerp(a, b, t) { return a + (b - a) * t; }
 
-  video.addEventListener("seeked", () => {
-    isSeeking = false;
-    if (Math.abs(video.currentTime - targetTime) > 0.05) {
-      isSeeking = true;
-      applySeek();
-    }
-  });
+  function startLoop() {
+    if (rafLoop) return;
+    function loop() {
+      rafLoop = requestAnimationFrame(loop);
+      if (!video.duration) return;
 
-  function onScroll() {
-    if (raf) return;
-    raf = requestAnimationFrame(() => {
-      raf = null;
-      const progress = getProgress();
-      updateCopy(progress);
-      if (!video.duration) return; // wait for metadata — will re-fire on loadedmetadata
-      targetTime = progress * video.duration;
-      if (!isSeeking) {
+      displayTime = lerp(displayTime, targetTime, 0.1);
+
+      // Only seek when the gap is visible (>1 frame at 30fps ≈ 0.033s)
+      // and the browser isn't still processing the last seek.
+      if (!isSeeking && Math.abs(displayTime - video.currentTime) > 0.033) {
         isSeeking = true;
-        applySeek();
+        video.currentTime = displayTime;
       }
-    });
+    }
+    loop();
   }
 
-  /* ── Desktop init ─────────────────────────────────────────
-     Attach scroll listener immediately. onScroll already
-     guards with `if (!video.duration) return`, so early
-     calls are safe. loadedmetadata fires a one-shot seek
-     to land on the correct frame once duration is known.    */
+  function stopLoop() {
+    if (rafLoop) { cancelAnimationFrame(rafLoop); rafLoop = null; }
+  }
+
+  video.addEventListener("seeked", () => { isSeeking = false; });
+
+  /* ── Scroll handler — only updates target + copy ────────── */
+  function onScroll() {
+    const progress = getProgress();
+    updateCopy(progress);
+    if (video.duration) {
+      targetTime = progress * video.duration;
+    }
+  }
+
+  /* ── Desktop init ───────────────────────────────────────── */
   function initDesktop() {
     video.pause();
     video.currentTime = 0;
+    displayTime = 0;
+    targetTime  = 0;
 
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
+    startLoop();
 
     if (!video.duration) {
       video.addEventListener("loadedmetadata", onScroll, { once: true });
     }
   }
 
-  /* ── Init ─────────────────────────────────────────────────  */
+  /* ── Init ───────────────────────────────────────────────── */
   if (isMobile()) {
     initMobile();
   } else {
@@ -112,6 +115,7 @@
       wasM = nowM;
       if (nowM) {
         window.removeEventListener("scroll", onScroll);
+        stopLoop();
         initMobile();
       } else {
         video.pause();
