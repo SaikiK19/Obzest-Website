@@ -137,7 +137,8 @@
       border-radius: 3px;
       margin-top: 20px;
     }
-    .form-status.success {
+    .form-status.success,
+    [data-fs-success]:not([hidden]) {
       display: block;
       background: rgba(26, 121, 120, 0.1);
       color: var(--color-teal);
@@ -191,7 +192,7 @@
   <section class="contact-section">
     <div class="contact-form-wrap">
 
-      <div class="form-status success" data-fs-success>
+      <div class="form-status" data-fs-success>
         Thanks! We've received your inquiry and will be in touch soon.
       </div>
       <div class="form-status error" data-fs-error></div>
