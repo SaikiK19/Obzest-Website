@@ -113,6 +113,19 @@
       cursor: pointer;
     }
 
+    /* ── Field-level errors ────────────────────────────────── */
+    .field-error {
+      font-family: var(--font);
+      font-size: 12px;
+      color: var(--color-burnt);
+      margin-top: 6px;
+      display: block;
+      min-height: 0;
+    }
+    [data-fs-field][aria-invalid="true"] {
+      border-bottom-color: var(--color-burnt);
+    }
+
     /* ── Success / Error messages ──────────────────────────── */
     .form-status {
       display: none;
@@ -178,16 +191,22 @@
   <section class="contact-section">
     <div class="contact-form-wrap">
 
-      <form id="contactForm" action="https://formspree.io/f/mzdkqqjp" method="POST" novalidate>
+      <div class="form-status success" data-fs-success>
+        Thanks! We've received your inquiry and will be in touch soon.
+      </div>
+      <div class="form-status error" data-fs-error></div>
+
+      <form id="contactForm">
 
         <div class="form-group">
           <label for="business">Business Name</label>
-          <input type="text" id="business" name="business" placeholder="Your shop, restaurant, or organization" required>
+          <input type="text" id="business" name="business" placeholder="Your shop, restaurant, or organization" data-fs-field required>
+          <span class="field-error" data-fs-error="business"></span>
         </div>
 
         <div class="form-group">
           <label for="referral">How did you hear about Obzest?</label>
-          <select id="referral" name="referral" required>
+          <select id="referral" name="referral" data-fs-field required>
             <option value="" disabled selected>Select one</option>
             <option value="Farmers Market">Farmers Market</option>
             <option value="Social Media">Social Media</option>
@@ -196,23 +215,22 @@
             <option value="Press / Media">Press / Media</option>
             <option value="Other">Other</option>
           </select>
+          <span class="field-error" data-fs-error="referral"></span>
         </div>
 
         <div class="form-group">
           <label for="quantity">Estimated Packages Needed</label>
-          <input type="number" id="quantity" name="quantity" placeholder="e.g. 50" min="1" required>
+          <input type="number" id="quantity" name="quantity" placeholder="e.g. 50" min="1" data-fs-field required>
+          <span class="field-error" data-fs-error="quantity"></span>
         </div>
 
         <div class="form-group">
           <label for="message">Anything else? (optional)</label>
-          <textarea id="message" name="message" placeholder="Tell us about your business, timeline, or questions"></textarea>
+          <textarea id="message" name="message" placeholder="Tell us about your business, timeline, or questions" data-fs-field></textarea>
         </div>
 
-        <!-- Routes Formspree submissions to info@getobzest.com -->
-        <input type="hidden" name="_replyto" value="info@getobzest.com">
         <input type="hidden" name="_subject" value="New Wholesale Inquiry — Obzest">
-        <button type="submit" class="btn-solid contact-submit">Send Inquiry</button>
-        <div class="form-status" id="formStatus"></div>
+        <button type="submit" class="btn-solid contact-submit" data-fs-submit-btn>Send Inquiry</button>
 
       </form>
     </div>
@@ -221,53 +239,9 @@
   <script src="js/nav.js"></script>
   <script src="js/fade-in.js"></script>
   <script>
-    const form   = document.getElementById('contactForm')
-    const status = document.getElementById('formStatus')
-
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault()
-
-      const business = document.getElementById('business').value.trim()
-      const referral = document.getElementById('referral').value
-      const quantity = document.getElementById('quantity').value.trim()
-
-      if (!business || !referral || !quantity) {
-        status.textContent = 'Please fill in all required fields.'
-        status.className = 'form-status error'
-        return
-      }
-
-      const btn = form.querySelector('button[type="submit"]')
-      btn.disabled = true
-      btn.textContent = 'Sending…'
-
-      try {
-        const data = new FormData(form)
-        // Tell Formspree to forward to info@getobzest.com
-        data.append('_replyto', document.getElementById('business').value.trim())
-
-        const res = await fetch(form.action, {
-          method: 'POST',
-          body: data,
-          headers: { 'Accept': 'application/json' }
-        })
-
-        if (res.ok) {
-          form.reset()
-          status.textContent = "Thanks! We've received your inquiry and will be in touch soon."
-          status.className = 'form-status success'
-          btn.textContent = 'Sent'
-        } else {
-          const json = await res.json()
-          throw new Error(json.error || 'Submission failed')
-        }
-      } catch (err) {
-        status.textContent = 'Something went wrong. Please email us directly at info@getobzest.com.'
-        status.className = 'form-status error'
-        btn.disabled = false
-        btn.textContent = 'Send Inquiry'
-      }
-    })
+    window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+    formspree('initForm', { formElement: '#contactForm', formId: 'mzdkqqjp' });
   </script>
+  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>
