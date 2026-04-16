@@ -16,25 +16,6 @@
 
   if (!wrapper || !video) return;
 
-  const isMobile = () => window.innerWidth < 768;
-
-  /* ── Mobile fallback ────────────────────────────────────── */
-  function initMobile() {
-    video.autoplay = true;
-    video.loop     = true;
-    video.play().catch(() => {});
-
-    // Cycle copy items one at a time every 2.5s instead of showing all at once
-    if (copyItems.length) {
-      let idx = 0;
-      copyItems[idx].classList.add("visible");
-      setInterval(() => {
-        copyItems[idx].classList.remove("visible");
-        idx = (idx + 1) % copyItems.length;
-        copyItems[idx].classList.add("visible");
-      }, 2500);
-    }
-  }
 
   /* ── Progress ───────────────────────────────────────────── */
   function getProgress() {
@@ -127,26 +108,5 @@
   }
 
   /* ── Init ───────────────────────────────────────────────── */
-  if (isMobile()) {
-    initMobile();
-  } else {
-    initDesktop();
-  }
-
-  let wasM = isMobile();
-  window.addEventListener("resize", () => {
-    const nowM = isMobile();
-    if (nowM !== wasM) {
-      wasM = nowM;
-      if (nowM) {
-        window.removeEventListener("scroll", onScroll);
-        stopLoop();
-        initMobile();
-      } else {
-        video.pause();
-        video.loop = false;
-        initDesktop();
-      }
-    }
-  });
+  initDesktop();
 })();

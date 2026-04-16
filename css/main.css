@@ -531,13 +531,13 @@ ul  { list-style: none; }
 
 .copy-item.visible { opacity: 1; }
 
-/* Mobile: autoplay fallback */
+/* Mobile: scroll-driven animation adjustments */
 @media (max-width: 768px) {
-  .animation-wrapper { height: auto; }
-  .animation-sticky { position: relative; height: 100vw; min-height: 480px; }
+  .animation-wrapper { height: 300vh; }
+  .animation-sticky { height: 100svh; }
   .copy-item {
     top: auto;
-    bottom: 12px;
+    bottom: 16px;
     transform: translateX(-50%);
     font-size: clamp(15px, 4.5vw, 20px);
     padding: 0 20px;
