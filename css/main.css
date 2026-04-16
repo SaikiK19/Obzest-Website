@@ -501,6 +501,7 @@ ul  { list-style: none; }
 .animation-copy {
   position: absolute;
   inset: 0;
+  z-index: 2;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -537,10 +538,17 @@ ul  { list-style: none; }
   .animation-sticky { height: 100svh; }
   .copy-item {
     top: auto;
-    bottom: 16px;
+    bottom: 24px;
     transform: translateX(-50%);
     font-size: clamp(15px, 4.5vw, 20px);
-    padding: 0 20px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.82);
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    width: auto;
+    max-width: calc(100% - 48px);
+    white-space: nowrap;
   }
 }
 
