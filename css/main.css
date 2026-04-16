@@ -483,7 +483,6 @@ ul  { list-style: none; }
   top: var(--nav-height);
   height: calc(100vh - var(--nav-height));
   overflow: hidden;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
