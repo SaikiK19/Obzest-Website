@@ -443,6 +443,12 @@
 @media (max-width: 768px) {
   .oc-cart-btn { margin-left: auto; margin-right: 12px; }
 }
+/* Tighten drawer padding on small screens */
+@media (max-width: 480px) {
+  .oc-header { padding: 22px 20px; }
+  .oc-body   { padding: 8px 20px; }
+  .oc-footer { padding: 20px 20px; }
+}
 
 /* ── Overlay ────────────────────────────────────────────── */
 #oc-overlay {

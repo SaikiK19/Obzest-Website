@@ -1178,34 +1178,56 @@ ul  { list-style: none; }
 }
 
 @media (max-width: 768px) {
-  .nav-inner { padding: 0 24px; }
+  .nav-inner { padding: 0 20px; }
   .nav-links { display: none; }
   .hamburger { display: flex; }
 
-  .products-grid { grid-template-columns: 1fr; max-width: 420px; }
+  /* Hero: center on mobile */
+  .hero { justify-content: center; padding-left: 0; padding-right: 0; }
+  .hero-content { text-align: center; padding: 0 28px; }
+
+  .products-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
   .products-section { padding: var(--section-pad) 24px; }
 
   .craft-section { grid-template-columns: 1fr; }
-  .craft-image { height: 320px; }
-  .craft-text { padding: 56px 24px; }
+  .craft-image { height: 300px; }
+  .craft-text { padding: 48px 24px; }
 
-  .attributes-strip { padding: 24px 20px; }
-  .attr-item { padding: 0 12px; font-size: 10px; }
+  .attributes-strip { padding: 20px 16px; }
+  .attr-item { padding: 0 10px; font-size: 10px; }
 
-  .find-us-section { height: 480px; }
+  .find-us-section { height: 460px; }
 
   .social-grid { grid-template-columns: repeat(2, 1fr); }
+  .social-section { padding: 72px 24px; }
 
-  .footer-top { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; padding-bottom: 40px; }
   .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
 
   .text-reveal-outer { height: auto; }
-  .brand-intro--sticky { position: relative; top: auto; height: auto; padding: 80px 24px; }
-  .brand-intro { padding: 80px 24px; }
-  .social-section { padding: 80px 24px; }
+  .brand-intro--sticky { position: relative; top: auto; height: auto; padding: 72px 24px; }
+  .brand-intro { padding: 72px 24px; }
   .footer-scroll-wrapper { height: auto; clip-path: none; }
   .footer-scroll-inner { height: auto; top: 0; }
-  .site-footer { position: relative; top: auto; height: auto; padding: 60px 24px 32px; }
+  .site-footer { position: relative; top: auto; height: auto; padding: 56px 24px 32px; }
+}
+
+@media (max-width: 480px) {
+  /* Stack product card buttons vertically */
+  .product-actions { flex-direction: column; gap: 10px; }
+  .product-actions .btn-outline,
+  .product-actions .btn-solid { flex: none; width: 100%; padding: 13px 0; }
+
+  /* Tighten hero */
+  .hero-headline { margin-bottom: 16px; }
+  .hero-content { padding: 0 20px; }
+
+  /* Tighten footer */
+  .site-footer { padding: 48px 20px 28px; }
+
+  /* Tighten brand intro */
+  .brand-intro--sticky,
+  .brand-intro { padding: 60px 20px; }
 }
 
 /* ------------------------------------------------------------
