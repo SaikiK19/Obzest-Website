@@ -113,19 +113,6 @@
       cursor: pointer;
     }
 
-    /* ── Field-level errors ────────────────────────────────── */
-    .field-error {
-      font-family: var(--font);
-      font-size: 12px;
-      color: var(--color-burnt);
-      margin-top: 6px;
-      display: block;
-      min-height: 0;
-    }
-    [data-fs-field][aria-invalid="true"] {
-      border-bottom-color: var(--color-burnt);
-    }
-
     /* ── Success / Error messages ──────────────────────────── */
     .form-status {
       display: none;
@@ -135,10 +122,9 @@
       text-align: center;
       padding: 14px 20px;
       border-radius: 3px;
-      margin-top: 20px;
+      margin-bottom: 28px;
     }
-    .form-status.success,
-    [data-fs-success]:not([hidden]) {
+    .form-status.success {
       display: block;
       background: rgba(26, 121, 120, 0.1);
       color: var(--color-teal);
@@ -192,22 +178,25 @@
   <section class="contact-section">
     <div class="contact-form-wrap">
 
-      <div class="form-status" data-fs-success hidden>
+      <div class="form-status success" id="formSuccess" style="display:none">
         Thanks! We've received your inquiry and will be in touch soon.
       </div>
-      <div class="form-status error" data-fs-error></div>
+      <div class="form-status error" id="formError" style="display:none">
+        Something went wrong — please try again or email us directly.
+      </div>
 
-      <form id="contactForm">
+      <form id="contactForm" name="contact" netlify netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact">
+        <p style="display:none"><input name="bot-field"></p>
 
         <div class="form-group">
           <label for="business">Business Name</label>
-          <input type="text" id="business" name="business" placeholder="Your shop, restaurant, or organization" data-fs-field required>
-          <span class="field-error" data-fs-error="business"></span>
+          <input type="text" id="business" name="business" placeholder="Your shop, restaurant, or organization" required>
         </div>
 
         <div class="form-group">
           <label for="referral">How did you hear about Obzest?</label>
-          <select id="referral" name="referral" data-fs-field required>
+          <select id="referral" name="referral" required>
             <option value="" disabled selected>Select one</option>
             <option value="Farmers Market">Farmers Market</option>
             <option value="Social Media">Social Media</option>
@@ -216,22 +205,19 @@
             <option value="Press / Media">Press / Media</option>
             <option value="Other">Other</option>
           </select>
-          <span class="field-error" data-fs-error="referral"></span>
         </div>
 
         <div class="form-group">
           <label for="quantity">Estimated Packages Needed</label>
-          <input type="number" id="quantity" name="quantity" placeholder="e.g. 50" min="1" data-fs-field required>
-          <span class="field-error" data-fs-error="quantity"></span>
+          <input type="number" id="quantity" name="quantity" placeholder="e.g. 50" min="1" required>
         </div>
 
         <div class="form-group">
           <label for="message">Anything else? (optional)</label>
-          <textarea id="message" name="message" placeholder="Tell us about your business, timeline, or questions" data-fs-field></textarea>
+          <textarea id="message" name="message" placeholder="Tell us about your business, timeline, or questions"></textarea>
         </div>
 
-        <input type="hidden" name="_subject" value="New Wholesale Inquiry — Obzest">
-        <button type="submit" class="btn-solid contact-submit" data-fs-submit-btn>Send Inquiry</button>
+        <button type="submit" class="btn-solid contact-submit" id="contactSubmit">Send Inquiry</button>
 
       </form>
     </div>
@@ -240,9 +226,35 @@
   <script src="js/nav.js"></script>
   <script src="js/fade-in.js"></script>
   <script>
-    window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
-    formspree('initForm', { formElement: '#contactForm', formId: 'mzdkqqjp' });
+    const form    = document.getElementById('contactForm')
+    const success = document.getElementById('formSuccess')
+    const error   = document.getElementById('formError')
+    const submit  = document.getElementById('contactSubmit')
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault()
+      submit.disabled = true
+      submit.textContent = 'Sending…'
+      error.style.display = 'none'
+
+      try {
+        const res = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(new FormData(form)).toString()
+        })
+        if (res.ok) {
+          form.style.display = 'none'
+          success.style.display = 'block'
+        } else {
+          throw new Error('Server error')
+        }
+      } catch {
+        error.style.display = 'block'
+        submit.disabled = false
+        submit.textContent = 'Send Inquiry'
+      }
+    })
   </script>
-  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>
