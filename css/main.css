@@ -541,20 +541,13 @@ ul  { list-style: none; }
 /* Mobile: scroll-driven animation adjustments */
 @media (max-width: 768px) {
   .animation-wrapper { height: 300vh; }
-  .animation-sticky { height: 100svh; }
+  .animation-sticky { height: 100vh; }
   .copy-item {
-    top: auto;
-    bottom: 24px;
-    transform: translateX(-50%);
     font-size: clamp(15px, 4.5vw, 20px);
     padding: 10px 20px;
-    background: rgba(255, 255, 255, 0.82);
+    background: rgba(255, 255, 255, 0.85);
     border-radius: 4px;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    width: auto;
     max-width: calc(100% - 48px);
-    white-space: nowrap;
   }
 }
 
