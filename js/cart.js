@@ -805,6 +805,7 @@
     if (existing) {
       cart = existing
       updateBadge()
+      renderLines()
     }
 
     // 1-second tick for the cart timer countdown
