@@ -23,7 +23,17 @@
     video.autoplay = true;
     video.loop     = true;
     video.play().catch(() => {});
-    copyItems.forEach(item => item.classList.add("visible"));
+
+    // Cycle copy items one at a time every 2.5s instead of showing all at once
+    if (copyItems.length) {
+      let idx = 0;
+      copyItems[idx].classList.add("visible");
+      setInterval(() => {
+        copyItems[idx].classList.remove("visible");
+        idx = (idx + 1) % copyItems.length;
+        copyItems[idx].classList.add("visible");
+      }, 2500);
+    }
   }
 
   /* ── Progress ───────────────────────────────────────────── */

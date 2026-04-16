@@ -535,7 +535,13 @@ ul  { list-style: none; }
 @media (max-width: 768px) {
   .animation-wrapper { height: auto; }
   .animation-sticky { position: relative; height: 100vw; min-height: 480px; }
-  .copy-item { font-size: 20px; bottom: 8vh; }
+  .copy-item {
+    top: auto;
+    bottom: 12px;
+    transform: translateX(-50%);
+    font-size: clamp(15px, 4.5vw, 20px);
+    padding: 0 20px;
+  }
 }
 
 /* ------------------------------------------------------------
