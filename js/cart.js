@@ -169,12 +169,14 @@
 
   function checkoutUrl() {
     if (!cart?.checkoutUrl) return '#'
+    // Force checkout through the myshopify.com domain — getobzest.com now
+    // points to the static Netlify site, not Shopify, so we swap the host.
+    const url = new URL(cart.checkoutUrl)
+    url.hostname = SHOP
     if (timerActive() && (cart.totalQuantity ?? 0) > 0) {
-      const url = new URL(cart.checkoutUrl)
       url.searchParams.set('discount', DISCOUNT_CODE)
-      return url.toString()
     }
-    return cart.checkoutUrl
+    return url.toString()
   }
 
   function fmtTime(ms) {
