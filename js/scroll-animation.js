@@ -58,7 +58,7 @@
       rafLoop = requestAnimationFrame(loop);
       if (!video.duration) return;
 
-      displayTime = lerp(displayTime, targetTime, 0.005);
+      displayTime = lerp(displayTime, targetTime, 0.003);
 
       // Seek when gap exceeds ~1 frame (0.033s) for fine-grained steps.
       if (!isSeeking && Math.abs(displayTime - video.currentTime) > 0.033) {
