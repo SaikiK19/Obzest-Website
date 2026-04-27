@@ -77,12 +77,22 @@
 
   /* ── Pre-buffer ─────────────────────────────────────────────
      Seek to the last frame once so the browser fetches the full
-     video, then return to 0. Eliminates stalling near the end.  */
+     video, then return to 0. Eliminates stalling near the end.
+     Timeout fallback handles iOS where seeked may never fire.   */
   function prebuffer() {
     const endTime = video.duration - 0.05;
     video.currentTime = endTime;
+
+    const fallback = setTimeout(() => {
+      video.currentTime = 0;
+      displayTime = 0;
+      isSeeking   = false;
+      onScroll();
+      startLoop();
+    }, 2500);
+
     video.addEventListener("seeked", function restoreStart() {
-      video.removeEventListener("seeked", restoreStart);
+      clearTimeout(fallback);
       video.currentTime = 0;
       displayTime = 0;
       isSeeking   = false;
@@ -99,6 +109,15 @@
     targetTime  = 0;
 
     window.addEventListener("scroll", onScroll, { passive: true });
+
+    // Force load (iOS ignores preload="auto" until explicitly told to load)
+    video.load();
+
+    // iOS won't allow seeking until play() has been called at least once.
+    // Unlock on first touch, then re-attempt prebuffer.
+    window.addEventListener("touchstart", function iosUnlock() {
+      video.play().then(() => { video.pause(); }).catch(() => {});
+    }, { once: true, passive: true });
 
     if (video.duration) {
       prebuffer();
