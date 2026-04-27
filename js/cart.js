@@ -339,6 +339,24 @@
     const co = document.getElementById('oc-checkout')
     if (co) co.href = checkoutUrl()
 
+    // Enforce 3-item minimum
+    const totalQty = cart?.totalQuantity ?? 0
+    const needed   = Math.max(0, 3 - totalQty)
+    let minMsg = document.getElementById('oc-min-msg')
+    if (needed > 0) {
+      if (!minMsg) {
+        minMsg = document.createElement('p')
+        minMsg.id = 'oc-min-msg'
+        minMsg.className = 'oc-min-msg'
+        footer.insertBefore(minMsg, co)
+      }
+      minMsg.textContent = `Add ${needed} more item${needed > 1 ? 's' : ''} to checkout`
+      if (co) { co.style.opacity = '0.35'; co.style.pointerEvents = 'none' }
+    } else {
+      if (minMsg) minMsg.remove()
+      if (co) { co.style.opacity = ''; co.style.pointerEvents = '' }
+    }
+
     // Qty / remove event listeners
     body.querySelectorAll('.oc-qty-btn').forEach(btn => {
       btn.addEventListener('click', async () => {
@@ -692,6 +710,17 @@
   font-size: 11px !important;
   opacity: 0.8;
   letter-spacing: 0.04em;
+}
+
+/* ── 3-item minimum message ─────────────────────────────── */
+.oc-min-msg {
+  font-family: var(--font, sans-serif);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-align: center;
+  color: var(--color-teal, #1A7978);
+  margin-bottom: 12px;
 }
 
 /* ── Toast ──────────────────────────────────────────────── */
