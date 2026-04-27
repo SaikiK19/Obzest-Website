@@ -712,6 +712,19 @@
   letter-spacing: 0.04em;
 }
 
+/* ── Pack reminder ──────────────────────────────────────── */
+.oc-pack-reminder {
+  font-family: var(--font, sans-serif);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-teal, #1A7978);
+  opacity: 0.8;
+  margin-bottom: 16px;
+}
+
 /* ── 3-item minimum message ─────────────────────────────── */
 .oc-min-msg {
   font-family: var(--font, sans-serif);
@@ -792,6 +805,7 @@
         <div class="oc-empty"><p>Your cart is empty.</p></div>
       </div>
       <div class="oc-footer" id="oc-footer" style="display:none">
+        <p class="oc-pack-reminder">Mix and match · Sold in packs of three</p>
         <div class="oc-subtotal-row">
           <span>Subtotal</span>
           <span id="oc-subtotal">—</span>
